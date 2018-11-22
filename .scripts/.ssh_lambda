@@ -1,0 +1,19 @@
+#!/bin/bash
+
+USER=jdelisle
+ALPHA=133.1.148.117
+OMEGA=133.1.148.119
+
+if [ $1 = -e ]; then
+    if [ $2 = -o ]; then
+        ssh -t -X $USER@$ALPHA ssh $USER@$OMEGA -t -X  $3
+    else
+        ssh -t -X $USER@$ALPHA ssh -t -X $USER@$OMEGA ssh -t -X lambda$2 $3
+    fi
+elif [ $1 = -o ]; then
+    ssh -X $USER@$OMEGA $2
+else
+    ssh -t -X $USER@$OMEGA ssh -t -X lambda$1 $2
+fi
+
+
